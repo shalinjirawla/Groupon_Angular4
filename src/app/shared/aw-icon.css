@@ -1,0 +1,232 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?a31hqg');
+    src:  url('fonts/icomoon.eot?a31hqg#iefix') format('embedded-opentype'),
+      url('fonts/icomoon.ttf?a31hqg') format('truetype'),
+      url('fonts/icomoon.woff?a31hqg') format('woff'),
+      url('fonts/icomoon.svg?a31hqg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  [class^="aw-"], [class*=" aw-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .aw-success .path1:before {
+    content: "\e900";
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path2:before {
+    content: "\e901";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path3:before {
+    content: "\e902";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path4:before {
+    content: "\e903";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path5:before {
+    content: "\e904";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path6:before {
+    content: "\e905";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path7:before {
+    content: "\e906";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path8:before {
+    content: "\e907";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path9:before {
+    content: "\e908";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path10:before {
+    content: "\e909";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path11:before {
+    content: "\e90a";
+    margin-left: -1.1328125em;
+    color: rgb(177, 255, 255);
+  }
+  .aw-success .path12:before {
+    content: "\e90b";
+    margin-left: -1.1328125em;
+    color: rgb(89, 166, 253);
+  }
+  .aw-Star1:before {
+    content: "\e90c";
+  }
+  .aw-calendar-o:before {
+    content: "\e90d";
+  }
+  .aw-ticket-o:before {
+    content: "\e90e";
+  }
+  .aw-check-o:before {
+    content: "\e90f";
+  }
+  .aw-circle-right:before {
+    content: "\e910";
+  }
+  .aw-circle-left:before {
+    content: "\e911";
+  }
+  .aw-search:before {
+    content: "\e912";
+  }
+  .aw-deal:before {
+    content: "\e913";
+  }
+  .aw-dining:before {
+    content: "\e914";
+  }
+  .aw-goods:before {
+    content: "\e915";
+  }
+  .aw-map-marker-h:before {
+    content: "\e916";
+  }
+  .aw-service:before {
+    content: "\e917";
+  }
+  .aw-spa-beauty:before {
+    content: "\e918";
+  }
+  .aw-calendar:before {
+    content: "\e919";
+  }
+  .aw-upload:before {
+    content: "\e91a";
+  }
+  .aw-send:before {
+    content: "\e91b";
+  }
+  .aw-check:before {
+    content: "\e91c";
+  }
+  .aw-pie-chart:before {
+    content: "\e91d";
+  }
+  .aw-meting:before {
+    content: "\e91e";
+  }
+  .aw-notifications:before {
+    content: "\e91f";
+  }
+  .aw-list-item:before {
+    content: "\e920";
+  }
+  .aw-gift:before {
+    content: "\e921";
+  }
+  .aw-dining-2:before {
+    content: "\e922";
+  }
+  .aw-facebook:before {
+    content: "\e923";
+  }
+  .aw-global:before {
+    content: "\e924";
+  }
+  .aw-house:before {
+    content: "\e925";
+  }
+  .aw-instagram:before {
+    content: "\e926";
+  }
+  .aw-services:before {
+    content: "\e927";
+  }
+  .aw-show-more:before {
+    content: "\e928";
+  }
+  .aw-twitter:before {
+    content: "\e929";
+  }
+  .aw-heart-o:before {
+    content: "\e92a";
+  }
+  .aw-heart-fill:before {
+    content: "\e92b";
+  }
+  .aw-ticket:before {
+    content: "\e92c";
+  }
+  .aw-map-marker:before {
+    content: "\e92d";
+  }
+  .aw-arrow-right:before {
+    content: "\e92e";
+  }
+  .aw-arrow-bottom:before {
+    content: "\e92f";
+  }
+  .aw-arrow-top:before {
+    content: "\e930";
+  }
+  .aw-arrow-left:before {
+    content: "\e931";
+  }
+  .aw-notepad:before {
+    content: "\e932";
+  }
+  .aw-cart:before {
+    content: "\e933";
+  }
+  .aw-uniE934:before {
+    content: "\e934";
+  }
+  .aw-uniE935:before {
+    content: "\e935";
+  }
+  .aw-map-marker-dr:before {
+    content: "\e936";
+  }
+  .aw-user:before {
+    content: "\e937";
+  }
+  .aw-share:before {
+    content: "\e938";
+  }
+  .aw-map-marker-o2:before {
+    content: "\e939";
+  }
+  .aw-add:before {
+    content: "\e93a";
+  }
+  .aw-remove:before {
+    content: "\e93b";
+  }
+  .aw-clock:before {
+    content: "\e93c";
+  }

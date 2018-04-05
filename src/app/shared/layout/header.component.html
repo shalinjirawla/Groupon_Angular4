@@ -1,0 +1,136 @@
+
+
+<style>
+    #sticky-wrapper1{
+        width: 1349px;
+    position: fixed;
+    top: 0px;
+    z-index: inherit;
+    }
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo64N1bkrG4THGyYCMJxzDSuLm3qVpM4I">
+
+</script>
+
+<div class="search-city-back" ng-class="{'active-location-back': setTimeClass}" ng-click="setTimeClass = !setTimeClass"></div>
+
+<div class="loader" style="display: none;">
+    <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+        <img src="/assets/images/loader.png">
+    </div>
+</div>
+
+
+<div id="sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 88px;"><header _ngcontent-c1="" class="back-skybl" style="width: 1349px; position: fixed; top: 0px; z-index: inherit;">
+        <div _ngcontent-c1="" class="top-header">
+            <div _ngcontent-c1="" class="container">
+                <div _ngcontent-c1="" class="location" ng-class="{'active-location': setTimeClass}">
+                    <a _ngcontent-c1="" href="javascript:void" ng-click="setTimeClass = !setTimeClass">
+                        <i _ngcontent-c1="" class="aw-map-marker-dr text-white icon"></i>
+                        Mangaf
+                        <span _ngcontent-c1="" class="caret"></span>
+                    </a>
+                    <div _ngcontent-c1="" class="location-suggestion">
+                        <select _ngcontent-c1="" class="form-control">
+                            <option _ngcontent-c1="" class="ng-binding" selected="" value="
+                      select your city
+                    " ng-reflect-value="
+                      select ">
+                                select your city
+                            </option>
+                            <option _ngcontent-c1="" value="
+                      Salmiya
+                      " ng-reflect-value="
+                      Salmiya">
+                                Salmiya
+                            </option>
+                            <option _ngcontent-c1="" value="
+                      Mangaf
+                      " ng-reflect-value="
+                      Mangaf
+">
+                                Mangaf
+                            </option>
+                            <option _ngcontent-c1="" value="
+                      Abu Halifa
+                    " ng-reflect-value="
+                      Abu Hal">
+                                Abu Halifa
+                            </option>
+                        </select>
+                        <span _ngcontent-c1="" class="caret"></span>
+                    </div>
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div _ngcontent-c1="" class="top-right-menu pull-right">
+                    <ul _ngcontent-c1="" class="list-inline list-unstyled">
+                        <li _ngcontent-c1="">
+                            <a _ngcontent-c1="" href="cartpayment.html">
+                                <i _ngcontent-c1="" class="aw-cart icon"></i> Cart </a>
+                        </li>
+                        <li _ngcontent-c1="">
+                            <a _ngcontent-c1="" ng-reflect-router-link="/LogIn" href="#/LogIn">Log In</a>
+                        </li>
+                        <li _ngcontent-c1="">
+                            <a _ngcontent-c1="" ng-reflect-router-link="/SignUp" href="#/SignUp">Sign Up</a>
+                        </li>
+                        <li _ngcontent-c1="" class="language ng-scope" ng-controller="language as ctrl">
+                            
+                            <a _ngcontent-c1="" class="lan-eng" href="javascript:void(0)" ng-click="ctrl.updateLanguage('en')" style="display: none;">English</a>
+                            <a _ngcontent-c1="" class="lan-ar" href="javascript:void(0)" ng-click="ctrl.updateLanguage('ar')" style="display: block;">أوفر</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+            </div>
+        </div>
+        <div _ngcontent-c1="" class="main-header">
+            <div _ngcontent-c1="" class=" container">
+                <nav _ngcontent-c1="" class="navbar ">
+                    <div _ngcontent-c1="" class="navbar-header">
+                        <a _ngcontent-c1="" class="navbar-brand" href="javascript:void(0)">
+                            <img _ngcontent-c1="" [routerLink]="['']"  src="assets/images/logo.png">
+                        </a>
+                        <span _ngcontent-c1="" class="search-icon">
+                            <i _ngcontent-c1="" class="aw-search icon"></i>
+                        </span>
+                        <span _ngcontent-c1="" id="hamburger-icon">
+                            <span _ngcontent-c1=""></span>
+                            <span _ngcontent-c1=""></span>
+                            <span _ngcontent-c1=""></span>
+                            <span _ngcontent-c1=""></span>
+                            <span _ngcontent-c1=""></span>
+                            <span _ngcontent-c1=""></span>
+                        </span>
+                    </div>
+                    <ul _ngcontent-c1="" class="navbar-right list-unstyled mr-tp10">
+                        <li _ngcontent-c1="">
+                            <div _ngcontent-c1="" class="search group-bar">
+                                <input _ngcontent-c1="" class="form-control" name="" placeholder="Search Local Deals" type="text">
+                                <span _ngcontent-c1="" class="bar"></span>
+                                <i _ngcontent-c1="" class="aw-search icon"></i>
+                                <span _ngcontent-c1="" class="close-search">
+                                    <i _ngcontent-c1="" class="fa fa-close icon"></i>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header></div>

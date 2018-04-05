@@ -1,0 +1,56 @@
+<section class="section-spaceing">
+  <div class="container">
+    <div class="content-box login-form">
+      <h2 class="text-center content-title mr-bt50 ng-binding">You Must Login to grab that Awesome Deal!</h2>     
+      <div>
+        <form class="ng-pristine ng-valid">
+          <div class="row login-form-row">
+            <div class="col-sm-6">
+              <div class="login-social-media">
+                <div class="social-login-content">
+                  <div class="google">
+                    <a href="" class="btn ng-binding">
+                      <i class="fa fa-google-plus"></i> 
+                       Login with Google 
+                    </a>
+                  </div>  
+                  <div class="facebook">
+                    <a href="" class="btn ng-binding">
+                     <i class="fa fa-facebook"></i> 
+                       Login with Facebook 
+                    </a>
+                  </div>
+                </div>  
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <form [formGroup]="LoginForm" (ngSubmit)="saveDetails()">
+              <div class="singline-form">
+                 <div class="form-group">
+                    <div class="input-label" [ngClass]="{'input-label-show': LoginForm.controls['EmailID'].value != '' ? true : false }">
+                     <label for="EmailID">Email address</label>
+                      <input type="email" class="form-control" formControlName="EmailID">
+                    </div>
+                  </div>
+                  <div class="form-group forgot-pass">
+                   <div class="input-label" [ngClass]="{'input-label-show': LoginForm.controls['Password'].value != '' ? true : false }">
+                       <label for="Password">Password</label>
+                       <input type="password" class="form-control pass-input" formControlName="Password">
+                       <a href="javascript:void(0)" class="forgot-pass-label ng-binding" data-toggle="modal" data-target="#forgot-password">Forgot?</a>
+                    </div>   
+                  </div>
+                  <div class="form-group">
+                     <input type="submit"  class="btn back-skybl btn-block pd-bt10 pd-tp10 mr-tp30 fn16 ng-binding" value="Log In">
+                   </div> 
+              </div>  
+              <div class="create-account">
+                <label class="ng-binding">Don't have an account? <a [routerLink]="['/SignUp']" class="text-black  ng-binding">Create One</a></label>
+              </div>
+             </form>  
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

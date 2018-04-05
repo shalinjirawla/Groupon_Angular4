@@ -1,0 +1,177 @@
+<section class="section-spaceing">
+  <div class="container">
+    <div class="content-box login-form registration-form">
+      <h2 class="text-center content-title mr-bt50 ng-binding">You Must Login to grab that Awesome Deal!</h2>
+      <div class="login-form-content">
+        <div class="login-social-media">
+          <div class="social-login-content">
+            <div class="google">
+              <a href="" class="btn ng-binding">
+                <i class="fa fa-google-plus"></i> Login with Google
+              </a>
+            </div>	
+            <div class="facebook">
+              <a href="" class="btn ng-binding">
+                <i class="fa fa-facebook"></i> 	Login with Facebook
+              </a>
+            </div>
+          </div>	
+        </div>
+        <form [formGroup]="SignUpForm" (ngSubmit)="saveDetails()" class="singline-form ng-pristine ng-valid">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label" [ngClass]="{'input-label-show': SignUpForm.controls['FirstName'].value != '' ? true : false }">
+                  <label for="first name">First Name</label>
+                  <input type="text" formControlName="FirstName"  class="form-control" required>
+                </div>
+                <span class="text-danger" *ngIf="SignUpForm.get('FirstName').invalid && SignUpForm.get('FirstName').touched">First Name is Required</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group upload-profile">
+                <div class="input-label input-label-show input-icon fileinput-icon ">
+                  <label for="profile image" class="ng-binding">Profile Image</label>
+                  <span class="">
+                    <div class="fileinput fileinput-new form-control" *ngIf="isUploadBtn"  data-provides="fileinput">
+                    <span class="btn-file"><span class="fileinput-new ng-binding"><i class="sci-attache"></i>Select file to upload</span><span class="fileinput-exists ng-binding">Change</span>
+                    
+                    <input type="hidden">
+                    <input type="hidden">
+                   
+                    <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event)" class="upload" />
+                  </span>
+                    <span class="fileinput-filename"></span>
+                      <a href="javascript:void(0)" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                    </div>
+                  </span>
+                  <i class="aw-upload"></i>
+                </div>
+                <div class="show-pr-img">
+                <img src="assets/images/team1.jpg" class="img-responsive img-circle" alt="user profile">	
+                </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label" [ngClass]="{'input-label-show': SignUpForm.controls['LastName'].value != '' ? true : false }">
+                  <label for="Last Name">Last Name</label>
+                  <input type="text" formControlName="LastName" class="form-control" required>
+                </div>
+                <span class="text-danger" *ngIf="SignUpForm.get('LastName').invalid && SignUpForm.get('LastName').touched">Last Name is Required</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              
+            </div>
+          </div>
+            <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div class="input-label" [ngClass]="{'input-label-show': SignUpForm.controls['EmailID'].value != '' ? true : false }">
+                  <label for="email">Email address</label>
+                  <input type="email" formControlName="EmailID" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control">
+                 </div>
+                 <span class="text-danger" *ngIf="SignUpForm.get('EmailID').invalid && SignUpForm.get('EmailID').touched">Email Address is Required</span>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label" [ngClass]="{'input-label-show': SignUpForm.controls['Password'].value != '' ? true : false }">
+                  <label for="password">Password</label>
+                  <input type="password" formControlName="Password" class="form-control ">
+                </div>
+                <span class="text-danger" *ngIf="SignUpForm.get('Password').invalid && SignUpForm.get('Password').touched">Password is Required</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label" [ngClass]="{'input-label-show': SignUpForm.controls['ConfirmPassword'].value != '' ? true : false }">
+                  <label for="password">Confirm Password</label>
+                  <input type="password" formControlName="ConfirmPassword" (blur)="matchPassword()"  class="form-control ">
+                </div>
+                <span class="text-danger" *ngIf="setconfirm != null">{{ setconfirm }}</span>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label input-label-show select-caret">
+                  <label for="gender">Gender</label>
+                  <select class="form-control" formControlName="Gender">
+                    <option value="Male">
+                      Male
+                    </option>
+                    <option value="Female">
+                      Female
+                    </option>
+                  </select>
+                  <span class="caret"></span>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label input-label-show input-icon">
+                  <label for="date of birth" class="ng-binding">Date of Birth</label>
+                  <my-date-picker name="DOB" [options]="myDatePickerOptions"
+                  formControlName="DOB"></my-date-picker>
+                </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">						
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div class="input-label" [ngClass]="{'input-label-show': SignUpForm.controls['LocationName'].value != '' ? true : false }">
+                  <label for="Location">Location</label>
+                  
+                  <input  ng2-auto-complete
+                  formControlName="continent"
+                  [source]="LocationList"
+                  [list-formatter]="autocompleListFormatter"
+                  value-property-name="LocationID"
+                  display-property-name="LocationName"
+                  formControlName="LocationName"
+                  class="form-control">
+                 
+                </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-label input-label-show select-caret">
+                  <label for="email" class="ng-binding">Interested Category</label>
+                  <select class="form-control" formControlName="Category">
+                    <option value = "Select" >--Select--</option>
+                    <option *ngFor="let cat of CategoryList" value= {{cat.ID}}>
+                      {{cat.CategoryName}}
+                    </option>
+                   </select>
+                  <span class="caret"></span>
+                </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="form-group">
+                   <input type="submit" class="btn back-skybl btn-block pd-bt10 pd-tp10 mr-tp30 fn16" value="Sign Up"> 
+               </div> 
+            </div>	
+          </div>
+          <div class="create-account">
+            <label class="ng-binding">Existing User? <a [routerLink]="['/LogIn']" class="text-black  ng-binding">Log In</a></label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
