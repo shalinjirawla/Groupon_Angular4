@@ -11,6 +11,7 @@ export class Deal{
     TotalQty : number;
     Price :  number;
     Discount : number;
+    DealSold : number;
 }
 
 export class AllDeal{
@@ -26,4 +27,8 @@ export class AllDeal{
     TotalQty : number;
     Price :  number;
     Discount : number;
+    AverageRating : number;
+    TotalLikes : number;
+    RateCount : number;
 }
+

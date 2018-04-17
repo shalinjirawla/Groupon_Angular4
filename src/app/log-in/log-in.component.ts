@@ -47,7 +47,7 @@ export class LogInComponent implements OnInit {
       
       
       let CurrentUser = guid;
-          
+  
 
       if(this.LoginForm.value.EmailID == response.EmailID && this.LoginForm.value.Password == response.Password){
         localStorage.setItem("LoginUser", CurrentUser);
@@ -65,7 +65,6 @@ export class LogInComponent implements OnInit {
     location.reload();
     this.LoginForm.reset();
     this.router.navigate(['']);
-
   }
 
 }

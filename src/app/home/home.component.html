@@ -15,9 +15,7 @@
        </div>
     </ng-owl-carousel> -->
 <div class="owl-theme homeslider owl-carousel owl-loaded owl-drag">
-     
-     
-       
+      
    <div class="owl-stage-outer">
        <div class="owl-stage" style="transform: translate3d(-2698px, 0px, 0px); transition: 0s; width: 9443px;">
            <div class="owl-item cloned" style="width: 1349px;">
@@ -124,7 +122,7 @@
         <div class="container">
             <div class="menubar-content">
                 <nav class="navbar sticky-top navbar-light bg-faded">
-                    <ul class=" list-unstyled list-inline ">
+                    <ul class="list-unstyled list-inline ">
                         <li class="active">
                             <a href="/home" class="">
             <i class="aw-map-marker-h"></i><br>
@@ -521,29 +519,26 @@
      
         <div class="form-group owl-theme owl-carousel dealslider owl-loaded owl-drag" style="display: flex;">
             
-           <div *ngFor="let hot of HotDeal" style="width: 370px;padding-right: 1%">
-               
+           <div *ngFor="let hot of HotDeal; let i = index" style="width: 370px;padding-right: 1%">
+
                <div class="" >
                 <div class="item">
                     <div class="deal-item">
                         <div class="img" on-click="PDetails(hot.ID)" [routerLink]="['/Product-Details']">
                             <span class="like-deal" ng-click="toggle = !toggle" ng-class="{'like-user' : toggle}">
-                                    <i class="aw-heart-o"></i>
-                                    <i class="aw-heart-fill"></i>
+                                    <i class="fa fa-heart-o"></i>
+                                    
                             </span>
                             <img [src]='sanitizer.bypassSecurityTrustUrl(hot.Image)'>
-                            
                             <div class="rating">
-                                        <span>
-                                            <i class="aw-Star1"></i>
-                                            <i class="aw-Star1"></i>
-                                            <i class="aw-Star1"></i>
-                                            <i class="fa fa-star-half-o ar-icon"></i>
-                                            <i class="fa fa-star-o"></i>
+                                        <span *ngFor="let r of hotstarss[i]">
+                                            <i class="fa fa-star" *ngIf="r.Value == 'Full'"></i>
+                                            <i class="fa fa-star-half-o" *ngIf="r.Value == 'Half'"></i>
+                                            <i class="fa fa-star-o" *ngIf="r.Value == 'O'"></i>
                                         </span>
-                                <span class="rating-person">
-                                            98
-                                    </span>
+                                        <span class="rating-person">
+                                               {{hot.RateCount}}
+                                         </span>
                             </div>
                         </div>
                         <div class="deal-content">
@@ -563,8 +558,7 @@
                                 <span class="discount">
                                         {{ hot.Discount }} % Off
                                     </span>
-                                    
-                            </div>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -574,9 +568,7 @@
         </div>
        </div>
 
-       <div class="owl-nav disabled"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div>
-       <div class="owl-dots disabled"></div>
-
+      
 
             <div class="deal-slider">
                 <div class="container">
@@ -586,27 +578,24 @@
                 </div>
                 
                 <div class="form-group owl-theme owl-carousel dealslider owl-loaded owl-drag" style="display: flex;">
-                    <div *ngFor="let trend of TrendDeal" style="width: 370px;padding-right:1%">
+                    <div *ngFor="let trend of TrendDeal; let i = index" style="width: 370px;padding-right:1%">
                         <div class="" >
                                 <div class="item">
                                     <div class="deal-item">
                                         <div class="img" on-click="PDetails(trend.ID)" [routerLink]="['/Product-Details']">
                                             <span class="like-deal" ng-click="toggle = !toggle" ng-class="{'like-user' : toggle}">
-                                                        <i class="aw-heart-o"></i>
-                                                        <i class="aw-heart-fill"></i>
+                                                    <i class="fa fa-heart-o"></i>
                                                 </span>
                                                 <img [src]='sanitizer.bypassSecurityTrustUrl(trend.Image)'>
                                             <div class="rating">
-                                                <span>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="fa fa-star-half-o ar-icon"></i>
-                                                                <i class="fa fa-star-o"></i>
+                                                            <span *ngFor="let r of trendstarss[i]">
+                                                                <i class="fa fa-star" *ngIf="r.Value == 'Full'"></i>
+                                                                <i class="fa fa-star-half-o" *ngIf="r.Value == 'Half'"></i>
+                                                                <i class="fa fa-star-o" *ngIf="r.Value == 'O'"></i>
                                                             </span>
-                                                <span class="rating-person">
-                                                                98
-                                                        </span>
+                                                            <span class="rating-person">
+                                                              {{trend.RateCount}}
+                                                            </span>
                                             </div>
                                         </div>
                                         <div class="deal-content">
@@ -644,27 +633,24 @@
                 </div>
                
                 <div class="form-group owl-theme owl-carousel dealslider owl-loaded owl-drag" style="display: flex;">
-                    <div *ngFor="let recom of RecommendDeal" style="width: 370px;padding-right:1%">
+                    <div *ngFor="let recom of RecommendDeal; let i = index" style="width: 370px;padding-right:1%">
                         <div class="">
                                 <div class="item">
                                     <div class="deal-item">
                                         <div class="img" on-click="PDetails(recom.ID)" [routerLink]="['/Product-Details']">
                                             <span class="like-deal" ng-click="toggle = !toggle" ng-class="{'like-user' : toggle}">
-                                                        <i class="aw-heart-o"></i>
-                                                        <i class="aw-heart-fill"></i>
+                                                    <i class="fa fa-heart-o"></i>
                                                 </span>
                                                 <img [src]='sanitizer.bypassSecurityTrustUrl(recom.Image)'>
                                             <div class="rating">
-                                                <span>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="fa fa-star-half-o ar-icon"></i>
-                                                                <i class="fa fa-star-o"></i>
-                                                            </span>
-                                                <span class="rating-person">
-                                                                98
-                                                        </span>
+                                                  <span *ngFor="let r of recomstarss[i]">
+                                                        <i class="fa fa-star" *ngIf="r.Value == 'Full'"></i>
+                                                       <i class="fa fa-star-half-o" *ngIf="r.Value == 'Half'"></i>
+                                                       <i class="fa fa-star-o" *ngIf="r.Value == 'O'"></i>
+                                                  </span>
+                                                  <span class="rating-person">
+                                                         {{recom.RateCount}}
+                                                   </span>
                                             </div>
                                         </div>
                                         <div class="deal-content">
@@ -700,27 +686,24 @@
                 </div>
                
                 <div class="form-group owl-theme owl-carousel dealslider owl-loaded owl-drag" style="display: flex;">
-                    <div *ngFor="let recent of RecentlyDeal" style="width: 370px;padding-right:1%">
+                    <div *ngFor="let recent of RecentlyDeal; let i = index" style="width: 370px;padding-right:1%">
                         <div class="">
                                 <div class="item">
                                     <div class="deal-item">
                                         <div class="img" on-click="PDetails(recent.ID)" [routerLink]="['/Product-Details']">
                                             <span class="like-deal" ng-click="toggle = !toggle" ng-class="{'like-user' : toggle}">
-                                                        <i class="aw-heart-o"></i>
-                                                        <i class="aw-heart-fill"></i>
+                                                    <i class="fa fa-heart-o"></i>
                                                 </span>
                                                 <img [src]='sanitizer.bypassSecurityTrustUrl(recent.Image)'>
                                             <div class="rating">
-                                                <span>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="aw-Star1"></i>
-                                                                <i class="fa fa-star-half-o ar-icon"></i>
-                                                                <i class="fa fa-star-o"></i>
-                                                            </span>
+                                                <span *ngFor="let r of recentstarss[i]">
+                                                    <i class="fa fa-star" *ngIf="r.Value == 'Full'"></i>
+                                                    <i class="fa fa-star-half-o" *ngIf="r.Value == 'Half'"></i>
+                                                    <i class="fa fa-star-o" *ngIf="r.Value == 'O'"></i>
+                                                </span>            
                                                 <span class="rating-person">
-                                                                98<!-- {{dealitem.rating}} -->
-                                                        </span>
+                                                                {{recent.RateCount}}
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="deal-content">

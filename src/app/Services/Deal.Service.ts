@@ -20,25 +20,25 @@ export class DealService {
 
     constructor(private http: Http) { }
 
-    getHotDeals() : Observable<Deal[]>{
+    getHotDeals() : Observable<AllDeal[]>{
         const url = `${this.BaseUrl}/GetHotDeals`;
         return this.http.get(url)
         .map(this.extractData);
     }
 
-    getTrendingDeals() : Observable<any[]>{
+    getTrendingDeals() : Observable<AllDeal[]>{
         const url = `${this.BaseUrl}/GetTrendingDeal`;
         return this.http.get(url)
         .map(this.extractData);
     }
 
-    getRecommendedDeals() : Observable<any[]>{
+    getRecommendedDeals() : Observable<AllDeal[]>{
         const url = `${this.BaseUrl}/GetRecommendedDeal`;
         return this.http.get(url)
         .map(this.extractData);
     }
 
-    getRecentlyDeals() : Observable<Deal[]>{
+    getRecentlyDeals() : Observable<AllDeal[]>{
         const url = `${this.BaseUrl}/GetRecentlyDeal`;
         return this.http.get(url)
         .map(this.extractData);

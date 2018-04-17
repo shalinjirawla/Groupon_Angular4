@@ -1,0 +1,276 @@
+<div class="clearfix"></div>
+
+    <section class="cart-section">
+        <div>
+            <form [formGroup]="PaymentDetailForm" (ngSubmit)="saveDetails()">
+        <div class="container">
+            <div class="title outside-title">
+                <h2 class="ro-l ng-binding">Cart</h2>
+            </div>
+            <div class="content-box">
+                <div class="title title-border">
+                    <h2 class="ng-binding">Review Order</h2>
+                </div>
+                <div class="cart-itm-list">
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="cart-itm-details">
+                                <div class="img">
+                                    <img src="assets/images/hotel.jpg" class="item-images">
+                                </div>
+                                <div class="content-desc">
+                                    <span class="remove-item  pull-right">
+                                    <a href="#" class="ng-binding">Delete</a>
+                                </span>
+                                    <div class="item-title">
+                                        {{Name}}
+                                    </div>
+                                    <div class="dela-offer-price ro-bo">
+                                        <span class="old-price ro-r ng-binding">
+                                        200 KD
+                                    </span>
+                                        <span class="new-price text-skybl ng-binding">
+                                        180 KD
+                                    </span>
+                                        <span class="discount ng-binding">
+                                        15 % Off
+                                    </span>
+                                    </div>
+                                    <div class="item-total-price mr-tp30">
+                                        <span>
+                                        <div class="input-group input-increment-decrement">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default btn-number" (click)='Minus()'>
+                                                <span class="aw-remove"></span>
+                                        </button>
+                                        </span>
+                                        <input type="text" name="quant[1]" class="form-control input-number" value={{Q}} min="1" max="10">
+                                        <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default btn-number" (click)='Plus()'>
+                                                <span class="aw-add"></span>
+                                        </button>
+                                        </span>
+                                    </div>
+                                   
+                                    </span>
+                                    <span>
+                                        <label class="ro-l ng-binding">Total:</label>
+                                        <span class="ro-m">{{180*Q}} </span>
+                                    </span>
+                                    <span>
+                                        <label class="ro-l ng-binding">Savings:</label>
+                                        <span class="ro-m"></span>
+                                    </span>
+                                </div>
+                            </div>
+                </div>
+                </li>
+            
+            </ul>
+        </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="content-box confirm-order">
+            <div class="row">
+                <div class="col-sm-5 col-xs-6">
+                    <span> <a class="btn back-skybl ng-binding" data-toggle="modal" data-target="#send-gift">
+                    <i class="aw-gift icon"></i> Send as Gift </a></span>
+                    <span class="promocode-input">
+                        <input type="text" name="" placeholder="enter code">
+                        <a href="#" class="ro-m text-skybl ng-binding">Apply</a>
+                    </span>
+                </div>
+                <div class="col-sm-4 col-xs-6">
+                    <span class="saving-price show-price">
+                        <label class="text-skybl ng-binding">Total Savings</label><br>
+                        <span class="ro-m">155 KD</span>
+                    </span>
+                    <span class="order-price show-price">
+                        <label class="text-skybl ng-binding">Order Total</label><br>
+                        <span class="ro-m">560 KD</span>
+                    </span>
+                </div>
+                <div class="col-sm-3 text-right">
+                    <a href="javascript:void(0)" class="confirm-order-btn text-skybl ng-binding"> Confirm Order <i class="fa fa-angle-right"></i> </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <span class="term-condition-text ng-binding">
+                        By clicking “Confirm Order” I accept the current Terms of Use, Refund Policy and Privacy Statement.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    
+        <div class="content-box mr-tp10">
+            <div class="title title-border">
+                <h2 class="ro-m ng-binding">Payment</h2>
+            </div>
+            <div class="billing-address">
+                <div class="panel-group accordion" id="accordion2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <label class="radio-inline radio-button radio-green">
+                                <input type="radio" name="collapsegroup" value="0" class="accordion-toggle accordion-toggle-styled collapsed" data-toggle=" collapse" data-parent="#accordion2" data-target="#collapse_2_1" aria-expanded="false">
+                                <div class="radio-checked"></div>
+                            </label>
+                                <a class="accordion-toggle collapsed ng-binding" (click)="isCollapsed1 = !isCollapsed1" [attr.aria-expanded]="!isCollapsed1"
+                                    aria-controls="collapseExample1">
+                                Net Banking
+                            </a>
+                            </h4>
+                        </div>
+                        <div id="collapseExample1" [ngbCollapse]="isCollapsed1" class="panel-collapse collapse">
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <label class="radio-inline radio-button radio-green">
+                                <input type="radio" name="collapsegroup" value="0" class="accordion-toggle accordion-toggle-styled collapsed " >
+                                <div class="radio-checked"></div>
+                            </label>
+                                <a class="accordion-toggle collapsed ng-binding" (click)="isCollapsed2 = !isCollapsed2" [attr.aria-expanded]="!isCollapsed2"
+                                    aria-controls="collapseExample2">
+                            Credit / Debit / ATM Card </a>
+                            </h4>
+                        </div>
+
+                        <div class="panel-collapse collapse" aria-expanded="false" id="collapseExample2" [ngbCollapse]="isCollapsed2">
+                            <div class="panel-body">
+                               
+                                    <div class="row">
+                                        <div class="col-sm-8 col-md-6 col-lg-4 sh-address-form bank-details">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-8">
+                                                    <div class="form-group">
+                                                        <div class="input-label border-input" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CardName'].value != '' ? true : false }">
+                                                            <label for="Name" class="ng-binding">Enter Card Name</label>
+                                                            <input type="text" formControlName="CardName" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-8">
+                                                    <div class="form-group">
+                                                        <div class="input-label border-input" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CardNumber'].value != '' ? true : false }">
+                                                            <label for="Name" class="ng-binding">Enter Card Number</label>
+                                                            <input type="text" formControlName="CardNumber" class="form-control" maxlength="19">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-8 backdetails-control ">
+                                                    <div class="form-group">
+                                                        <div class="bank-details-exp">
+                                                            <label class="ng-binding">
+                                                                Expiry
+                                                            </label>
+                                                            <div class="input-label select-caret border-input ">
+                                                                <select class="form-control">
+                                                                    <option value="MM">MM</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                    <option value="08">08</option>
+                                                                    <option value="09">09</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                <span class="caret"></span>
+                                                            </div>
+                                                            <div class="input-label select-caret border-input ">
+                                                                <select class="form-control">
+                                                                    <option value="YY">YY</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                </select>
+                                                                <span class="caret"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-label border-input cvv-popover" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CVV'].value != '' ? true : false }">
+                                                            <label for="Address">CVV</label>
+                                                            <input type="text" class="form-control" formControlName="CVV" required maxlength="4">
+                                                            <i class="fa fa-question-circle" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Some content"
+                                                                data-original-title="" title=""></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-sm-12">
+                                                    <button type="submit" value="" class="btn back-skybl ng-binding">    Pay 560 KD
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-6 col-lg-8">
+
+                                        </div>
+                                    </div>
+                            
+                                </div>                         
+                            </div>
+                       
+                       
+                    </div>
+              
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <label class="radio-inline radio-button radio-green">
+                                <input type="radio" name="collapsegroup" value="0" class="accordion-toggle accordion-toggle-styled collapsed" data-toggle=" collapse" data-parent="#accordion2" data-target="#collapse_2_3" aria-expanded="false">
+                                <div class="radio-checked"></div>
+                            </label>
+                                <a class="accordion-toggle collapsed ng-binding" (click)="isCollapsed3 = !isCollapsed3" [attr.aria-expanded]="!isCollapsed3"
+                                    aria-controls="collapseExample3">  K-Net Payment Gateway</a>
+                            </h4>
+                        </div>
+                        <div class="panel-collapse collapse" aria-expanded="false" id="collapseExample3" [ngbCollapse]="isCollapsed3">
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="placeorder text-right back-skybl">
+                    <a href="javascript:void(0)" class="confirm-order-btn text-white ro-m ng-binding" data-toggle="modal" data-target="#complete-order"> Place Order <i class="fa fa-angle-right"></i> </a>
+                </div>
+            </div>
+        </div>
+   
+
+        </div>
+    </form>
+</div>
+    </section>

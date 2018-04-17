@@ -13,9 +13,7 @@ import { RegistrationService } from './Services/Registration.Service';
 import { MyDatePickerModule } from 'mydatepicker';
 import { CategoryService } from './Services/Category.Service';
 import { LocationService } from './Services/Location.Service';
-import { Ng2CompleterModule } from "ng2-completer";
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 import { LoginService } from './Services/Login.Service';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CommonModule, APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common'; 
@@ -23,6 +21,15 @@ import { StickyModule } from 'ng2-sticky-kit';
 import { DealComponent } from './deal/deal.component';
 import { DealService } from './Services/Deal.Service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { DealReviewService } from './Services/DealReview.Service';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { DealLikeService } from './Services/DealLike.Service';
+import { DealRecomService } from './Services/DealRecom.Service';
+import { OffersService } from './Services/Offers.Service';
+import { PopupModalComponent } from './popup.component';
+import { CartpaymentComponent } from './cartpayment/cartpayment.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from './Services/Cart.Service';
 
 
 @NgModule({
@@ -35,7 +42,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     LogInComponent,
     DealComponent,
     ProductDetailsComponent,
-    
+    TimeAgoPipe,
+    PopupModalComponent,
+    CartpaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -44,13 +53,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     HttpModule,
     routing,
     MyDatePickerModule,
-    Ng2CompleterModule,
     Ng2AutoCompleteModule,
     FileUploadModule,
-    Angular2FontawesomeModule,
-    StickyModule
+    StickyModule,
+    NgbModule,
+    
   ],
-  providers: [ RegistrationService, CategoryService, LocationService, LoginService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, DealService ],
+  providers: [ RegistrationService, CategoryService, LocationService, LoginService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, DealService, 
+  DealReviewService, DealLikeService, DealRecomService, OffersService, CartService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
