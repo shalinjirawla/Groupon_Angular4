@@ -163,5 +163,4 @@ export class HomeComponent implements OnInit {
     location.reload();
   }
  
-
 }

@@ -6,38 +6,32 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/of';
 
-import { Offers } from '../Model/Offers.Model';
-import { Cart } from '../Model/Cart.Model';
+import { DealCode } from '../Model/DealCode.Model';
 
 @Injectable()
-export class OffersService {
+export class DealCodeService {
     //////////////////////////////////////
     //                                  //
-    //         Offers Service           //
+    //       DealCode Service           //
     //                                  //
     //////////////////////////////////////
 
-    BaseUrl = `http://localhost:61072/api/Offers`;
+    BaseUrl = `http://localhost:61072/api/DealCode`;
 
     constructor(private http: Http) { }
 
-    getOfferDealByID(id : number) : Observable<Offers[]>{
-        const url = `${this.BaseUrl}/DealOffers/${id}`;
-        return this.http.get(url)
-        .map(this.extractData);
-    }
-
-    OfferDealByID(cart : Cart) : Observable<Cart>{
-        const url = `${this.BaseUrl}/OfferDealByID`;
+    ApplyCode( DC : DealCode ) : Observable<DealCode>{
+        const url = `${this.BaseUrl}/GetCodeStatus`;
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(url, cart, options)
+        return this.http.post(url, DC, options)
         .map(this.extractData);
     }
-
+    
     private extractData(response: Response) {
         let body = response.json();
         return body;
     }
+
 }

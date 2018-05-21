@@ -1,110 +1,192 @@
 <div class="clearfix"></div>
 
-    <section class="cart-section">
-        <div>
-            <form [formGroup]="PaymentDetailForm" (ngSubmit)="saveDetails()">
+<section class="cart-section">
+    <div>
+
         <div class="container">
             <div class="title outside-title">
                 <h2 class="ro-l ng-binding">Cart</h2>
             </div>
-            <div class="content-box">
-                <div class="title title-border">
-                    <h2 class="ng-binding">Review Order</h2>
-                </div>
-                <div class="cart-itm-list">
-                    <ul class="list-unstyled">
-                        <li>
-                            <div class="cart-itm-details">
-                                <div class="img">
-                                    <img src="assets/images/hotel.jpg" class="item-images">
-                                </div>
-                                <div class="content-desc">
-                                    <span class="remove-item  pull-right">
-                                    <a href="#" class="ng-binding">Delete</a>
+            <!-- <div class="content-box" *ngIf="display==true">
+                    <div class="cart-itm-list">
+                            
+                      </div>
+                   <div class="title title-border">
+                        <h2 class="ng-binding"> Your Cart is Empty!! Continue Shopping</h2>
+                    </div>
+            </div> -->
+           
+                <div class="content-box">
+                    <div class="title title-border">
+                        <h2 class="ng-binding">Review Order</h2>
+                    </div>
+
+                    <div class="cart-itm-list" *ngFor="let Cartitem of UserCartList; let i = index">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="cart-itm-details">
+                                    <div class="img">
+                                        <img [src]='sanitizer.bypassSecurityTrustUrl(Cartitem.Image)' class="item-images">
+                                    </div>
+                                    <div class="content-desc">
+                                        <span class="remove-item  pull-right">
+                                    <a href="javascript:;" (click)="emptycart(Cartitem.ID)" class="ng-binding">Delete</a>
                                 </span>
-                                    <div class="item-title">
-                                        {{Name}}
-                                    </div>
-                                    <div class="dela-offer-price ro-bo">
-                                        <span class="old-price ro-r ng-binding">
-                                        200 KD
+                                        <div class="item-title">
+                                            {{Cartitem.Name}}{{Cartitem.Text}}
+                                        </div>
+                                        <div class="dela-offer-price ro-bo">
+                                            <span class="old-price ro-r ng-binding">
+                                                <i *ngIf="Cartitem.Price1 != 0"> {{Cartitem.Price1}} KD</i>
+                                                <i *ngIf="Cartitem.Price != 0"> {{Cartitem.Price}} KD</i>
+                                         </span>
+                                            <span class="new-price text-skybl ng-binding">
+                                                <i *ngIf="Cartitem.Price1 && Cartitem.Discount1 != 0"> {{ (Cartitem.Price1 / 100) * (100 - Cartitem.Discount1) | number : '1.2-2' }} KD</i>
+                                                <i *ngIf="Cartitem.Price && Cartitem.Discount != 0"> {{ (Cartitem.Price / 100) * (100 - Cartitem.Discount) | number : '1.2-2' }} KD</i>
+                                      </span>
+                                            <span class="discount ng-binding">
+                                            <i *ngIf="Cartitem.Discount1 != 0"> {{Cartitem.Discount1}} % Off</i>
+                                            <i *ngIf="Cartitem.Discount != 0"> {{Cartitem.Discount}} % Off</i>
                                     </span>
-                                        <span class="new-price text-skybl ng-binding">
-                                        180 KD
-                                    </span>
-                                        <span class="discount ng-binding">
-                                        15 % Off
-                                    </span>
-                                    </div>
-                                    <div class="item-total-price mr-tp30">
-                                        <span>
+                                            
+                                        </div>
+                                        <i *ngIf="allItemMsg == true" style="color:#045304">"Coupon Code Applied Successfully"</i>
+                                        <div *ngFor="let a of tempoffer">
+                                            <i *ngIf="a == Cartitem.OfferID" style="color:#045304">"Coupon Code Applied Successfully"</i>
+                                        </div>
+                                        <i *ngIf="tempoffer == Cartitem.DealID" style="color:#045304">"Coupon Code Applied Successfully"</i>
+                                        <div class="item-total-price mr-tp30">
+                                            <span>
                                         <div class="input-group input-increment-decrement">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default btn-number" (click)='Minus()'>
+                                                <button type="button" class="btn btn-default btn-number" [attr.disabled]="Cartitem.Qty == 1 ? '' : null"  (click)="Minus(Cartitem.ID,i)">
                                                 <span class="aw-remove"></span>
-                                        </button>
-                                        </span>
-                                        <input type="text" name="quant[1]" class="form-control input-number" value={{Q}} min="1" max="10">
-                                        <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default btn-number" (click)='Plus()'>
+                                            </button>
+                                            </span>
+                                            <input type="text" name="quant[1]" class="form-control input-number" value={{Cartitem.Qty}}>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default btn-number" (click)="Plus(Cartitem.ID,i)" >
                                                 <span class="aw-add"></span>
-                                        </button>
+                                            </button>
+                                            </span>
+                                        </div>
+
+                                        </span>
+                                        <span>
+                                        <label class="ro-l ng-binding">Total: </label>
+                                        <span class="ro-m">{{Cartitem.Total | number : '1.2-2' }} KD</span>
+                                        </span>
+                                        <span>
+                                        <label class="ro-l ng-binding">Savings:</label>
+                                        <span class="ro-m" *ngIf="Cartitem.Price1 && Cartitem.Discount1 != 0">{{(Cartitem.Qty * Cartitem.Price1) - Cartitem.Total | number : '1.2-2' }} KD</span>
+                                        <span class="ro-m" *ngIf="Cartitem.Price && Cartitem.Discount != 0">{{(Cartitem.Qty * Cartitem.Price) - Cartitem.Total | number : '1.2-2' }} KD</span>
                                         </span>
                                     </div>
-                                   
-                                    </span>
-                                    <span>
-                                        <label class="ro-l ng-binding">Total:</label>
-                                        <span class="ro-m">{{180*Q}} </span>
-                                    </span>
-                                    <span>
-                                        <label class="ro-l ng-binding">Savings:</label>
-                                        <span class="ro-m"></span>
-                                    </span>
                                 </div>
-                            </div>
+                             </div>
+                           </li>
+                      </ul>
+                    </div>
                 </div>
-                </li>
-            
-            </ul>
-        </div>
-        </div>
+        
+    
         <div class="clearfix"></div>
         <div class="content-box confirm-order">
             <div class="row">
                 <div class="col-sm-5 col-xs-6">
-                    <span> <a class="btn back-skybl ng-binding" data-toggle="modal" data-target="#send-gift">
-                    <i class="aw-gift icon"></i> Send as Gift </a></span>
-                    <span class="promocode-input">
-                        <input type="text" name="" placeholder="enter code">
-                        <a href="#" class="ro-m text-skybl ng-binding">Apply</a>
-                    </span>
-                </div>
-                <div class="col-sm-4 col-xs-6">
-                    <span class="saving-price show-price">
+                    <span> <a  class="btn back-skybl ng-binding" href="javascript:void(0)" (click)="modal2.show()" >
+                            <form [formGroup]="GiftForm">
+                                    <app-modal #modal2>
+                                        <div class="app-modal-header">
+                                            <button type="button" class="btn back-skybl ng-binding" >&times;</button>
+                                            <h2><b> Send as Gift </b></h2>
+                                        </div>
+                        
+                                        <div class="app-modal-body">
+                                            <div class="singline-form">
+                                                <div class="form-group">
+                                                    <div class="input-label" [ngClass]="{'input-label-show': GiftForm.controls['Name'].value != '' ? true : false }">
+                                                        <label for="email">Name</label>
+                                                        <input type="text" class="form-control" formControlName="Name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-label" [ngClass]="{'input-label-show': GiftForm.controls['RecipientEmail'].value != '' ? true : false }">
+                                                        <label for="email">Recipient Email</label>
+                                                        <input type="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control" formControlName="RecipientEmail">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-label auto-textarea" [ngClass]="{'input-label-show': GiftForm.controls['Message'].value != '' ? true : false }">
+                                                        <label for="email">Customize Your Message:</label>
+                                                        <textarea class="form-control" formControlName="Message"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group input-label-show">
+                                                    <div class="input-label input-label-show input-icon">
+                                                        <label for="date of birth">When Would you like to send your gift?</label>
+                                                    </div>
+                                                    <div>
+                                                        <my-date-picker name="Date" [options]="myDatePickerOptions" formControlName="DateToSend" placeholder="When Would you like to send your gift?"></my-date-picker>
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group">
+                                                    <div class="item-total-price mr-tp30 text-left">
+                        
+                                                        <span class="mr-tp10">
+                                                              <label class="ro-l ng-binding">Total :</label>
+                                                              <span class="ro-m"> KD</span>
+                                                        </span>
+                                                        <span class="pull-right" style="margin: 0px;">
+                                                              <a href="javascript:void(0)" class="btn back-skybl btn-block pd-bt10 pd-tp10 fn16 ng-binding" (click)="modal2.hide()" data-dismiss="modal"> SAVE </a>
+                                                          </span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                         </app-modal>
+                    </form>
+        <i class="aw-gift icon"></i> Send as Gift </a>
+    </span>
+           
+            <span class="promocode-input">
+                        <input #couponcode type="text" placeholder="enter code">
+                        <button (click)="CouponCodeApply(couponcode.value)" *ngIf="codeMsg == false" class="ro-m text-skybl ng-binding">Apply</button>
+                        <button (click)="removeCouponCode(couponcode.value = '' )" *ngIf="codeMsg == true" class="ro-m text-skybl ng-binding">Remove</button>
+            </span>
+            <span>
+                <i *ngIf="codeMsg == true" style="color:#045304">Coupon Code Applied Successfully</i>
+                <i *ngIf="errorMsg == true" style="color:red">{{ErrorMsg}}</i>
+            </span>
+      </div>
+
+    <div class="col-sm-4 col-xs-6">
+                     <span class="saving-price show-price">
                         <label class="text-skybl ng-binding">Total Savings</label><br>
-                        <span class="ro-m">155 KD</span>
-                    </span>
-                    <span class="order-price show-price">
+                        <span class="ro-m">{{ totalsavs | number : '1.2-2' }} KD</span>
+                     </span>
+                       <span class="order-price show-price">
                         <label class="text-skybl ng-binding">Order Total</label><br>
-                        <span class="ro-m">560 KD</span>
-                    </span>
-                </div>
-                <div class="col-sm-3 text-right">
-                    <a href="javascript:void(0)" class="confirm-order-btn text-skybl ng-binding"> Confirm Order <i class="fa fa-angle-right"></i> </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 ">
-                    <span class="term-condition-text ng-binding">
+                        <span class="ro-m">{{ totalmoney | number : '1.2-2' }} KD</span>
+                      </span>
+        
+    </div>
+    <div class="col-sm-3 text-right">
+        <a href="javascript:void(0)" class="confirm-order-btn text-skybl ng-binding"> Confirm Order <i class="fa fa-angle-right"></i> </a>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 ">
+            <span class="term-condition-text ng-binding">
                         By clicking “Confirm Order” I accept the current Terms of Use, Refund Policy and Privacy Statement.
                     </span>
-                </div>
-            </div>
         </div>
-        <div class="clearfix"></div>
+    </div>
+    </div>
+    <div class="clearfix"></div>
 
-    
+    <form [formGroup]="PaymentDetailForm" (ngSubmit)="saveDetails()">
         <div class="content-box mr-tp10">
             <div class="title title-border">
                 <h2 class="ro-m ng-binding">Payment</h2>
@@ -130,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="panel panel-default">
 
                         <div class="panel-heading">
@@ -147,40 +229,40 @@
 
                         <div class="panel-collapse collapse" aria-expanded="false" id="collapseExample2" [ngbCollapse]="isCollapsed2">
                             <div class="panel-body">
-                               
-                                    <div class="row">
-                                        <div class="col-sm-8 col-md-6 col-lg-4 sh-address-form bank-details">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-xs-8">
-                                                    <div class="form-group">
-                                                        <div class="input-label border-input" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CardName'].value != '' ? true : false }">
-                                                            <label for="Name" class="ng-binding">Enter Card Name</label>
-                                                            <input type="text" formControlName="CardName" class="form-control">
-                                                        </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 col-md-6 col-lg-4 sh-address-form bank-details">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-8">
+                                                <div class="form-group">
+                                                    <div class="input-label border-input" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CardName'].value != '' ? true : false }">
+                                                        <label for="Name" class="ng-binding">Enter Card Name</label>
+                                                        <input type="text" formControlName="CardName" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="row">
-                                                <div class="col-sm-12 col-xs-8">
-                                                    <div class="form-group">
-                                                        <div class="input-label border-input" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CardNumber'].value != '' ? true : false }">
-                                                            <label for="Name" class="ng-binding">Enter Card Number</label>
-                                                            <input type="text" formControlName="CardNumber" class="form-control" maxlength="19">
-                                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-8">
+                                                <div class="form-group">
+                                                    <div class="input-label border-input" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CardNumber'].value != '' ? true : false }">
+                                                        <label for="Name" class="ng-binding">Enter Card Number</label>
+                                                        <input type="text" formControlName="CardNumber" class="form-control" maxlength="19">
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="row">
-                                                <div class="col-sm-12 col-xs-8 backdetails-control ">
-                                                    <div class="form-group">
-                                                        <div class="bank-details-exp">
-                                                            <label class="ng-binding">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-8 backdetails-control ">
+                                                <div class="form-group">
+                                                    <div class="bank-details-exp">
+                                                        <label class="ng-binding">
                                                                 Expiry
                                                             </label>
-                                                            <div class="input-label select-caret border-input ">
-                                                                <select class="form-control">
+                                                        <div class="input-label select-caret border-input ">
+                                                            <select class="form-control">
                                                                     <option value="MM">MM</option>
                                                                     <option value="01">01</option>
                                                                     <option value="02">02</option>
@@ -195,10 +277,10 @@
                                                                     <option value="11">11</option>
                                                                     <option value="12">12</option>
                                                                 </select>
-                                                                <span class="caret"></span>
-                                                            </div>
-                                                            <div class="input-label select-caret border-input ">
-                                                                <select class="form-control">
+                                                            <span class="caret"></span>
+                                                        </div>
+                                                        <div class="input-label select-caret border-input ">
+                                                            <select class="form-control">
                                                                     <option value="YY">YY</option>
                                                                     <option value="18">18</option>
                                                                     <option value="19">19</option>
@@ -213,38 +295,38 @@
                                                                     <option value="28">28</option>
                                                                     <option value="29">29</option>
                                                                 </select>
-                                                                <span class="caret"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="input-label border-input cvv-popover" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CVV'].value != '' ? true : false }">
-                                                            <label for="Address">CVV</label>
-                                                            <input type="text" class="form-control" formControlName="CVV" required maxlength="4">
-                                                            <i class="fa fa-question-circle" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Some content"
-                                                                data-original-title="" title=""></i>
+                                                            <span class="caret"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row ">
-                                                <div class="col-sm-12">
-                                                    <button type="submit" value="" class="btn back-skybl ng-binding">    Pay 560 KD
-                                                    </button>
+                                                <div class="form-group">
+                                                    <div class="input-label border-input cvv-popover" [ngClass]="{'input-label-show': PaymentDetailForm.controls['CVV'].value != '' ? true : false }">
+                                                        <label for="Address">CVV</label>
+                                                        <input type="text" class="form-control" formControlName="CVV" required maxlength="4">
+                                                        <i class="fa fa-question-circle" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Some content"
+                                                            data-original-title="" title=""></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-6 col-lg-8">
-
+                                        <div class="row ">
+                                            <div class="col-sm-12">
+                                                <button type="submit" value="" class="btn back-skybl ng-binding">    Pay 560 KD
+                                                    </button>
+                                            </div>
                                         </div>
                                     </div>
-                            
-                                </div>                         
+                                    <div class="col-sm-4 col-md-6 col-lg-8">
+
+                                    </div>
+                                </div>
+
                             </div>
-                       
-                       
+                        </div>
+
+
                     </div>
-              
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -268,9 +350,9 @@
                 </div>
             </div>
         </div>
-   
 
-        </div>
     </form>
-</div>
-    </section>
+    </div>
+
+    </div>
+</section>

@@ -13,6 +13,8 @@ import { OffersService } from '../Services/Offers.Service';
 import { DealLike } from '../Model/DealLike.Model';
 import { Offers } from '../Model/Offers.Model';
 import { FormBuilder,FormGroup, FormControl, Validators } from '@angular/forms';
+import { CartService } from '../Services/Cart.Service';
+import { Cart } from '../Model/Cart.Model';
 
 @Component({
   selector: 'app-product-details',
@@ -36,6 +38,11 @@ export class ProductDetailsComponent implements OnInit {
   hotstarss = [];
   reviewstarss = [];
   @ViewChild('modal1') public modal1;
+  offerlength;
+  temporaryRadioID : string;
+  ProductPrice;
+  ResponsePrice;
+  Addcartitem;
   
 
   constructor(private dealService: DealService,
@@ -47,7 +54,11 @@ export class ProductDetailsComponent implements OnInit {
     private dealLikeService: DealLikeService,
     private dealRecomService: DealRecomService,
     private offersService: OffersService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private cartService : CartService) { }
+
+    ProductDetailForm : FormGroup;
+    CartModel : Cart;
 
   ngOnInit() {
     this.CheckID();
@@ -71,7 +82,6 @@ export class ProductDetailsComponent implements OnInit {
       this.getDealReview(id);
       this.getAverage(id);
       this.DealOffer(id);
-
     }
   }
 
@@ -101,6 +111,13 @@ export class ProductDetailsComponent implements OnInit {
           }
         }
       }
+    });
+  }
+
+  GetUserCartItem(UID){
+    this.cartService.getDealByID(UID).subscribe(response => {
+      this.Addcartitem = response;
+      this.router.navigate(['/CartPayment']);
     });
   }
 
@@ -134,6 +151,11 @@ export class ProductDetailsComponent implements OnInit {
   DealOffer(id) {
     this.offersService.getOfferDealByID(id).subscribe((abc: Offers[]) => {
       this.offerDeal = abc;
+      this.temporaryRadioID = abc[0].ID;
+      let p = abc[0].Price;
+      let d = abc[0].Discount;
+      this.ProductPrice = (p / 100) * (100 - d);
+      this.offerlength = abc;
     });
   }
 
@@ -151,6 +173,7 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  
 
   changetab(liid, divid) {
     let div = document.getElementById(divid);
@@ -197,9 +220,8 @@ export class ProductDetailsComponent implements OnInit {
     if (this.Q <= 9) {
       this.Q = 1 + this.Q++;
     }
-
   }
-  Minus() {
+  Minus( ) {
     if (this.Q >= 2)
       this.Q--
   }
@@ -226,14 +248,75 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
-  getItemID(){
-    
+  getItemID(id,radioi){
+    this.temporaryRadioID = id;
+    for(var i = 0; i < this.offerDeal.length; i++){
+      if(i == radioi){
+        if(this.offerDeal[radioi]){
+          let Price = this.offerDeal[radioi].Price;
+          let Discount = this.offerDeal[radioi].Discount;
+          this.ProductPrice = (Price / 100) * (100 - Discount);
+        }
+      }
   }
+}
+
+  CartItem(){
+
+    let UID = localStorage.getItem("LoginUser");
+    let DID = localStorage.getItem("DealID");
+    
+      if(this.offerlength != undefined && this.offerlength.length > 0){
+        
+        
+        let total = this.Q * this.ProductPrice;
+
+
+        let data = Object.assign({}, this.CartModel, {
+          UserID : UID,
+          OfferID : this.temporaryRadioID,
+          Qty : this.Q,
+          Total : total
+        });
+      
+        this.cartService.InsertCartItem(data).subscribe(response => {
+          this.temporaryRadioID = "";
+          this.ProductPrice = null;
+          this.ResponsePrice = null;
+          this.Q = 1;
+          this.GetUserCartItem(UID);
+        });
+       
+      }
+      else
+      {
+         let total = this.Q * this.ResponsePrice;
+        let data = Object.assign({}, this.CartModel, {
+          UserID : UID,
+          Qty : this.Q,
+          DealID : DID,
+          Total : total
+        });
+        
+        this.cartService.InsertCartItem(data).subscribe(response =>{
+          this.temporaryRadioID = "";
+          this.ProductPrice = null;
+          this.ResponsePrice = null;
+          this.Q = 1;
+          this.GetUserCartItem(UID);
+        });
+        
+      }
+    }
 
   PDetails(id) {
     if (id != null) {
       this.dealService.getDealByID(id).subscribe((abc: AllDeal[]) => {
         this.getResponse = abc;
+        let Result = JSON.parse(JSON.stringify(abc));
+        let p = Result.Price;
+        let d = Result.Discount;
+        this.ResponsePrice = (p / 100) * (100 - d);
         localStorage.setItem("DealID", id);
       });
     }

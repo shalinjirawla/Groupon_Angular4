@@ -531,6 +531,7 @@
 <div class="clearfix"></div>
 
 <div ng-view="" class="fade-in-up ng-scope" style="margin-top:3%">
+
     <section class="space-padding pd-tp15 ng-scope">
         <div class="container">
             <div class="breadcrumb-list">
@@ -541,133 +542,134 @@
                     <li class="active">Deal Name</li>
                 </ol>
             </div>
-            <div class="title-product title-product-sm ">
-                <h2 class=""> {{getResponse.Name}} </h2>
-            </div>
-            <div class="row mr-tp20">
-                <div class="col-md-6">
-                    <div class="deal-item deal-item-detail">
-                        <div class="img">
-                            <img [src]='sanitizer.bypassSecurityTrustUrl(getResponse.Image)'>
-                            <div class="rating">
-                                <span *ngFor="let r of starss">
+           
+                <div class="title-product title-product-sm ">
+                    <h2 class=""> {{getResponse.Name}} </h2>
+                </div>
+                <div class="row mr-tp20">
+                    <div class="col-md-6">
+                        <div class="deal-item deal-item-detail">
+                            <div class="img">
+                                <img [src]='sanitizer.bypassSecurityTrustUrl(getResponse.Image)'>
+                                <div class="rating">
+                                    <span *ngFor="let r of starss">
                                         <i class="fa fa-star" *ngIf="r.Value == 'Full'"></i>
                                         <i class="fa fa-star-half-o" *ngIf="r.Value == 'Half'"></i>
                                         <i class="fa fa-star-o" *ngIf="r.Value == 'O'"></i>
                                 </span>
-                                <span class="rating-person">
+                                    <span class="rating-person">
                     {{totalRating}}
                 <span class="like-deal" (click)="DealLike()">
                        <i class="fa fa-heart-o" *ngIf="status == false"></i>
                        <i class="fa fa-heart" *ngIf="status == true"></i>
                        <span class="notification"> {{average.TotalLikes}} </span>
-                                </span>
-                                <span class="share-deal">
+                                    </span>
+                                    <span class="share-deal">
                        <i class="fa fa-share-alt"></i>
                   </span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="deal-content">
-                            <div class="dela-offer-text ro-r">
-                                <div class="deal-location">
-                                    <i class="aw-map-marker-o2"></i>
-                                    <span></span> <span> {{getResponse.LocationName}}
-                      <a href="javascript::void()" class="text-skybl ng-binding">Get Direction </a></span>
+                                    </span>
                                 </div>
-                                <div class="deal-ticket">
-                                    <span>
+                            </div>
+                            <div class="deal-content">
+                                <div class="dela-offer-text ro-r">
+                                    <div class="deal-location">
+                                        <i class="aw-map-marker-o2"></i>
+                                        <span></span> <span> {{getResponse.LocationName}}
+                      <a href="javascript::void()" class="text-skybl ng-binding">Get Direction </a></span>
+                                    </div>
+                                    <div class="deal-ticket">
+                                        <span>
                         <i class="aw-ticket-o"></i>
                         <span class="ng-binding">Over {{getResponse.DealSold}} + Deals Sold</span>
-                                    </span>
-                                    <span class="pull-right showall-review">
+                                        </span>
+                                        <span class="pull-right showall-review">
                         <i class="aw-notepad"></i>
                         <a href="javascript::void()" class="text-skybl  ng-binding">{{average.TotalReviews}}+ Reviews</a>
                       </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="content-box special-offers">
-                        <div class="title">
-                            <h2 class="ng-binding">Special offers</h2>
-                        </div>
-                        <div class="special-offers-list scrollbar">
+                    <div class="col-md-6">
+                        <div class="content-box special-offers">
+                            <div class="title">
+                                <h2 class="ng-binding">Special offers</h2>
+                            </div>
+                            <div class="special-offers-list scrollbar">
 
-                            <div *ngIf="offerDeal.length > 0">
-                                <div *ngFor="let offer of offerDeal; let i = index">
+                                <div *ngIf="offerDeal.length > 0">
+                                    <div *ngFor="let offer of offerDeal; let i = index">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <div class="s-offer-content">
+                                                    <div class="s-offer-text mr-tp10">
+                                                        <label class="radio-inline radio-button radio-green">
+                                                        <input type="radio" name="optradio" [checked]="i === 0" (click)="getItemID(offer.ID, i)" value="offer.ID">
+                                                      <div class="radio-checked"></div>
+                                                     </label>
+                                                        <p>{{offer.Text}}</p>
+                                                        <span class="ng-binding">Over {{offer.Count}} Bought</span>
+                                                    </div>
+                                                    <div class="s-offer-button-price">
+                                                        <span class="dela-offer-price ro-bo">
+                                                   <span class="old-price  ro-r">{{offer.Price}} KD</span>
+                                                        <span class="new-price text-skybl">{{ (offer.Price / 100) * (100 - offer.Discount) | number : '1.2-2' }} KD </span>
+                                                        </span>
+                                                        <label class="text-white  back-s-green label-offer ro-l ng-binding">
+                                                             {{offer.Discount}}% Off
+                                                     </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div *ngIf="offerDeal.length == 0">
                                     <ul class="list-unstyled">
                                         <li>
                                             <div class="s-offer-content">
                                                 <div class="s-offer-text mr-tp10">
                                                     <label class="radio-inline radio-button radio-green">
-                                                        <input type="radio" name="optradio" [checked]='true' value="offer.ID">
-                                                      <div class="radio-checked"></div>
-                                                     </label>
-                                                    <p>{{offer.Text}}</p>
-                                                    <span class="ng-binding">Over {{offer.Count}} Bought</span>
+                                               <input type="radio" [checked]='true' name="optradio" value="offer.ID">
+                                               <div class="radio-checked"></div>
+                                             </label>
+                                                    <p>{{getResponse.Name}}</p>
+                                                    <span class="ng-binding">Over {{getResponse.DealSold}} Bought</span>
                                                 </div>
                                                 <div class="s-offer-button-price">
                                                     <span class="dela-offer-price ro-bo">
-                                                   <span class="old-price  ro-r">{{offer.Price}} KD</span>
-                                                    <span class="new-price text-skybl">{{ (offer.Price / 100) * (100 - offer.Discount) | number : '1.2-2' }} KD </span>
+                                                 <span class="old-price  ro-r">{{getResponse.Price}} KD</span>
+                                                    <span class="new-price text-skybl">{{ (getResponse.Price / 100) * (100 - getResponse.Discount) | number : '1.2-2' }} KD </span>
                                                     </span>
                                                     <label class="text-white  back-s-green label-offer ro-l ng-binding">
-                                                             {{offer.Discount}}% Off
-                                                     </label>
+                                                 {{getResponse.Discount}}% Off
+                                             </label>
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div *ngIf="offerDeal.length == 0">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <div class="s-offer-content">
-                                            <div class="s-offer-text mr-tp10">
-                                                <label class="radio-inline radio-button radio-green">
-                                               <input type="radio" name="optradio" [checked]='true' value="0">
-                                               <div class="radio-checked"></div>
-                                             </label>
-                                                <p>{{getResponse.Name}}</p>
-                                                <span class="ng-binding">Over {{getResponse.DealSold}} Bought</span>
-                                            </div>
-                                            <div class="s-offer-button-price">
-                                                <span class="dela-offer-price ro-bo">
-                                                 <span class="old-price  ro-r">{{getResponse.Price}} KD</span>
-                                                <span class="new-price text-skybl">{{ (getResponse.Price / 100) * (100 - getResponse.Discount) | number : '1.2-2' }} KD </span>
-                                                </span>
-                                                <label class="text-white  back-s-green label-offer ro-l ng-binding">
-                                                 {{getResponse.Discount}}% Off
-                                             </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="special-offers-action text-right">
-                            <span class="pull-left mr-tp5">
+                            <div class="special-offers-action text-right">
+                                <span class="pull-left mr-tp5">
                   <span class="text-qty ng-binding"> Qty: &nbsp; </span>
-                            <div class="input-group input-increment-decrement">
-                                <span class="input-group-btn">
-                                                      <button type="button" class="btn btn-default btn-number" (click)='Minus()'>
+                                <div class="input-group input-increment-decrement">
+                                    <span class="input-group-btn">
+                                                      <button type="button" class="btn btn-default btn-number" [attr.disabled]="Q == 1 ? '' : null" (click)='Minus()'>
                                                       <span class="aw-remove"></span>
-                                </button>
-                                </span>
-                                <input type="text" class="form-control input-number" value={{Q}} min="1" max="10">
-                                <span class="input-group-btn">
+                                    </button>
+                                    </span>
+                                    <i class="form-control input-number">{{Q}}</i>
+                                    <span class="input-group-btn">
                                                       <button type="button" class="btn btn-default btn-number" (click)='Plus()'>
                                                       <span class="aw-add"></span>
-                                </button>
+                                    </button>
+                                    </span>
+                                </div>
                                 </span>
-                            </div>
-                            </span>
-                            <span>
-                  <a [routerLink]="['/CartPayment']" (click)="getItemID()" class="btn back-skybl addtocart ng-binding">
+                                <span>
+                  <a  (click)="CartItem()" class="btn back-skybl addtocart ng-binding">
                     <i class="aw-cart icon"></i>
                      Add To cart
                   </a>
@@ -678,11 +680,11 @@
                   </button>
                   </span>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+           
 
 
             <div class="row mr-tp50 mr-bt50">
@@ -705,10 +707,6 @@
                 </div>
             </div>
         </div>
-        <div>
-
-        </div>
-
 
         <div class="deal-slider">
             <div class="container">
@@ -866,5 +864,4 @@
             </app-modal>
         </form>
     </section>
-
 </div>

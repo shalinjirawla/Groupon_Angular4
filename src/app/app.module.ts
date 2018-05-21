@@ -30,6 +30,7 @@ import { PopupModalComponent } from './popup.component';
 import { CartpaymentComponent } from './cartpayment/cartpayment.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from './Services/Cart.Service';
+import { DealCodeService } from './Services/DealCode.Service';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { CartService } from './Services/Cart.Service';
     
   ],
   providers: [ RegistrationService, CategoryService, LocationService, LoginService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, DealService, 
-  DealReviewService, DealLikeService, DealRecomService, OffersService, CartService ],
+  DealReviewService, DealLikeService, DealRecomService, OffersService, CartService, DealCodeService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
